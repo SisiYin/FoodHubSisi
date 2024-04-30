@@ -1,0 +1,165 @@
+/* index.html */
+
+body {
+  background-image: url("../img/background.svg");
+  background-size: cover; /* Adjust the size to cover the entire viewport */
+  background-repeat: no-repeat; /* Ensure the background image doesn't repeat */
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+#logo {
+  height: 60px;
+}
+#searchContainer {
+  margin: 10px 10px;
+  border-radius: 5px;
+}
+.material-symbols-outlined {
+  font-size: 36px;
+}
+
+.category-button {
+  padding: 0.25rem 0.5rem;
+  /* font-size: 0.8rem; */
+  border-radius: 10px;
+  margin: 5px;
+  color: #333;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+.category-button.active {
+  background-color: #28a745;
+  color: white;
+}
+
+#trendingPostsContainer {
+  height: 200px;
+  width: 100%;
+  border: 1px solid #4d4545;
+  border-radius: 10px;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #0e100e;
+}
+.noHrefColor {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* search result page */
+.card-header {
+  margin: -3px;
+  padding: 0.5rem 1rem;
+}
+.card-title {
+  margin-bottom: 0px;
+}
+
+.card-body {
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+}
+.card-text.description {
+  margin-bottom: 0.5rem;
+}
+
+.badge.bg-success.me-1 {
+  margin-bottom: 0.3rem;
+}
+
+#commentsColumn,
+#rateColumn {
+  padding: 0rem 0.5rem;
+}
+
+.collapse.show {
+  max-height: 300px; /* Adjust the maximum height as needed */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+#logo,
+#userAvatar,
+#userAvatarInOffCanvas {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+#navOffCanvas,
+#userOffCanvas {
+  width: 320px;
+}
+
+#closeOffCanvasButton {
+  background-color: #4d4545;
+}
+.form-control:focus {
+  box-shadow: none;
+}
+
+.addIcon {
+  font-size: 2rem;
+}
+.addIconContainer {
+  width: 3.2rem;
+}
+
+.stars {
+  text-align: center;
+  font-size: 30px;
+}
+
+.stars i {
+  --v: 0;
+  background: linear-gradient(
+    90deg,
+    yellow calc(var(--v) * 1%),
+    transparent 0%
+  );
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 3px rgb(173, 19, 19);
+  cursor: pointer;
+}
+
+/* .stars:hover i,
+.stars:hover .half-filled::before {
+  width: 50%;
+  overflow: hidden;
+  color: yellow;
+} */
+.fa-star.filled,
+.fa-star.half-filled {
+  color: yellow; /* 已填充和半填充星星的颜色 */
+}
+
+.fa-star.half-filled::before {
+  content: "\f089"; /* Unicode 图标代码，表示半星 */
+}
+
+.avgStars {
+  position: relative;
+  font-size: 20px;
+}
+
+.avgStars i {
+  color: #ddd;
+}
+
+.avgStars .rated,
+.avgStars .half-rated {
+  color: yellow;
+}
+
+.avgStars .half-rated::before {
+  content: "\f089";
+  overflow: hidden;
+  width: 50%;
+}
+
+.commentDescription {
+  font-size: 13px; /* 自定义字体大小 */
+  line-height: 1; /* 自定义行距 */
+}

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FoodHub</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body class="index-background">
+    <!-- Nav bar -->
+    <nav class="navbar bg-white border-bottom border-bottom-3 border-dark">
+      <div class="container row align-items-center justify-content-between">
+        <!-- nav off canvas -->
+        <div class="col-1 d-flex align-items-center ms-1 me-0" id="navStart">
+          <span
+            class="material-symbols-outlined border border-2 border-black rounded"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#navOffCanvas"
+            aria-expanded="false"
+            href="#navOffCanvas"
+            role="button"
+          >
+            menu
+          </span>
+
+          <div
+            class="offcanvas offcanvas-start text-bg-dark rounded-end"
+            tabindex="-1"
+            id="navOffCanvas"
+            aria-labelledby="offcanvasExampleLabel"
+          >
+            <div
+              class="offcanvas-header border-bottom border-2 border-white align-items-center p-2"
+            >
+              <a href="./index.html" id="homePage" class="me-2">
+                <img
+                  src="./img/logo2.png"
+                  alt="logo"
+                  id="logo"
+                  class="rounded border border-2 border-white"
+                  href="./index.html"
+                />
+              </a>
+              <h3 class="offcanvas-title" id="offcanvasLabel">FoodHub</h3>
+
+              <button
+                type="button"
+                class="btn-close me-2"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+                id="closeOffCanvasButton"
+              ></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item d-flex align-items-center">
+                  <i class="bi bi-house fs-1 me-3"></i>
+                  <a class="nav-link text-white fs-5" href="./index.html"
+                    >Home</a
+                  >
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                  <span class="material-symbols-outlined fs-1 me-3">
+                    trending_up
+                  </span>
+                  <a class="nav-link text-white fs-5" href="./trending.html"
+                    >Trending</a
+                  >
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                  <i class="bi bi-people fs-1 me-3"></i>
+                  <a class="nav-link text-white fs-5" href="./following.html"
+                    >Following</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-2">
+          <a href="./index.html" id="homePage" class="ms-2">
+            <img
+              src="./img/logo2.png"
+              alt="logo"
+              id="logo"
+              class="rounded border border-2 border-black rounded-3"
+              href="./index.html"
+            />
+          </a>
+        </div>
+        <div class="col-6 ms-3 px-0">
+          <!-- search bar section -->
+          <section
+            class="bg-white border border-2 border-dark rounded"
+            id="searchBar"
+          >
+            <div class="input-group align-items-center">
+              <input
+                id="searchInput"
+                type="search"
+                class="form-control"
+                placeholder="Kebab? Pizza? Sushi?..."
+                aria-label="Search"
+              />
+              <span class="material-symbols-outlined" id="searchButton">
+                search
+              </span>
+            </div>
+          </section>
+        </div>
+        <div class="col-1 ms-0 me-1 p-0" id="navEnd">
+          <span
+            data-bs-toggle="modal"
+            data-bs-target="#loginModal"
+            class="material-symbols-outlined border border-2 border-black rounded mt-1"
+            id="loginButton"
+          >
+            login
+          </span>
+
+          <!-- nav userAvatar offCanvas -->
+          <div class="mx-0" id="profileContainer">
+            <a
+              data-bs-toggle="offcanvas"
+              href="#userOffCanvas"
+              role="button"
+              id="userAvatarContainer"
+            >
+            </a>
+
+            <div
+              class="offcanvas offcanvas-end text-bg-dark rounded-start"
+              tabindex="-1"
+              id="userOffCanvas"
+              aria-labelledby="offcanvasRightLabel"
+            >
+              <div
+                class="offcanvas-header border-bottom border-2 border-white align-items-center p-2"
+              >
+                <div id="userAvatarInOffCanvasContainer" class="me-2"></div>
+                <div
+                  id="userInfo"
+                  class="justify-content-center align-items-center"
+                >
+                  <div><p class="mb-0" id="offCanvasUsername">username</p></div>
+                  <div><p class="mb-0" id="offCanvasEmail">email</p></div>
+                </div>
+                <button
+                  type="button"
+                  class="btn-close me-0"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                  id="closeOffCanvasButton"
+                ></button>
+              </div>
+              <div
+                class="offcanvas-body border-bottom border-2 border-white align-items-center p-3"
+              >
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item d-flex align-items-center">
+                    <i class="bi bi-journal-arrow-up fs-1 me-3"></i>
+                    <a class="nav-link text-white fs-5" href="./myPosts.html"
+                      >My Posts</a
+                    >
+                  </li>
+                  <li class="nav-item d-flex align-items-center">
+                    <a class="nav-link text-white fs-5" href="./myProfile.html"
+                      ><span>
+                        <i class="bi bi-person-square fs-2 me-3"></i
+                      ></span>
+                      <span>My Profile</span></a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="offcanvas-footer align-items-center p-2 ps-3">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item d-flex align-items-center">
+                    <i class="bi bi-box-arrow-right fs-1 me-3"></i>
+                    <a class="nav-link text-white fs-5" id="logoutButton"
+                      >Log Out</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Add a new post section -->
+    <section
+      class="m-3 align-items-center justify-content-center d-flex border border-2 border-dark rounded-2 bg-light"
+      id="addPostButton"
+      data-bs-toggle="modal"
+      data-bs-target="#addPostModal"
+    >
+      <div
+        class="addIconContainer align-items-center justify-content-center d-flex"
+      >
+        <i class="bi bi-plus-lg addIcon"></i>
+      </div>
+    </section>
+
+    <!-- My Posts section -->
+    <section class="rounded mx-3" id="myPostsCollection">
+      <!-- Rendering Search Result Section -->
+
+      <div class="card bg-transparent border-0" id="myPostsContainer">
+        <!-- insert header here -->
+        <!-- insert body here -->
+        <!-- insert footer here -->
+        <!-- Comments section, initially hidden -->
+        <div class="collapse" id="collapseComments">
+          <!-- Include your comments here -->
+        </div>
+      </div>
+    </section>
+
+    <!-- login Modal -->
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">login</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              id="closeLoginModalButton"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <!-- login form goes here -->
+
+            <form id="loginForm">
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control border border-2"
+                  id="loginEmail"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control border border-2"
+                  id="loginPassword"
+                />
+              </div>
+
+              <p>
+                Haven't been our user?
+                <a
+                  href="#"
+                  id="registerLink"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#registerModal"
+                >
+                  Register here!
+                </a>
+              </p>
+
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="loginFormSubmit"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div
+      class="modal fade"
+      id="registerModal"
+      tabindex="-1"
+      aria-labelledby="registerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="registerModalLabel">Register</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              id="closeRegisterModalButton"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <!-- registration form goes here -->
+            <form id="registrationForm">
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control border border-2"
+                  id="registeredUsername"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control border border-2"
+                  id="registeredEmail"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control border border-2"
+                  id="registeredPassword"
+                />
+              </div>
+              <p>
+                Already have an account?
+                <a
+                  href="#"
+                  id="loginLink"
+                  data-bs-dismiss="modal"
+                  data-bs-toggle="modal"
+                  data-bs-target="#loginModal"
+                >
+                  Login here!
+                </a>
+              </p>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                id="registeredFormSubmit"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- add posts Modal -->
+    <div
+      class="modal fade"
+      id="addPostModal"
+      tabindex="-1"
+      aria-labelledby="addPostLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addPostModalLabel">Add a new post</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              id="closeAddPostModalButton"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <!-- post form goes here -->
+            <form id="postForm" enctype="multipart/form-data">
+              <!-- Add enctype attribute for file upload -->
+              <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <textarea
+                  class="form-control border border-2"
+                  id="title"
+                  rows="1"
+                ></textarea>
+                <!-- Add textarea for description -->
+              </div>
+              <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea
+                  class="form-control border border-2"
+                  id="description"
+                  rows="3"
+                ></textarea>
+                <!-- Add textarea for description -->
+              </div>
+              <div class="mb-3" id="categoryContainer">
+                <label for="category" class="form-label">Category</label>
+                <div id="categoriesDisplayArea"></div>
+                <div class="d-flex align-items-center" id="categoriesInputArea">
+                  <input
+                    class="form-control border border-2 me-2"
+                    id="categoryInput"
+                    rows="1"
+                  />
+                  <!-- <i
+                    class="bi bi-bookmark-plus fs-1 m-0 me-2"
+                    id="addCategoryButton"
+                  ></i> -->
+                </div>
+                <!-- Add textarea for description -->
+              </div>
+              <div class="mb-3">
+                <label for="photos" class="form-label">Photos</label>
+                <input
+                  type="file"
+                  class="form-control border border-2"
+                  id="photos"
+                  accept="image/*"
+                  multiple=""
+                />
+                <!-- Add file input for photo upload -->
+              </div>
+              <button type="submit" class="btn btn-primary" id="postFormSubmit">
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./script/myPost.js" type="module"></script>
+  </body>
+</html>
