@@ -4,6 +4,7 @@ import {
   renderingMyPosts,
 } from "./modules/renderingPosts.js";
 import { Posts } from "./modules/posts.js";
+
 import { renderingAvatar } from "./modules/renderingUser.js";
 import {
   registration,
@@ -41,10 +42,7 @@ const commentInput = document.getElementById("comment");
 const textarea = document.querySelector("textarea");
 const useCount = document.getElementById("useCount");
 
-// //获取当前页面的 URL
-// const url = window.location.href;
-// // 从 URL 中提取文章 ID
-// const postId = url.substring(url.lastIndexOf('/') + 1);
+
 
 const getPostByPostId = async () => {
    // get post_id
@@ -81,7 +79,7 @@ const createImage = (photoData) => {
   img.style.height = "200px";
   img.style.width = "100%";
   
-  // 返回创建的图像元素
+ 
   return img;
 };
 
@@ -148,38 +146,7 @@ const renderingComments = (commentsData) => {
   });
 };
 
-// stars.addEventListener("click",async function(event) {
-//   vote = 0
-//   for (let i = 0; i < 5; i++) {
-//     icons[i].style.setProperty("--v",0)
-//     if (icons[i] == event.target) {
-//       vote = i
-//       for (let j = 0; j < i; j++) {
-//         icons[j].style.setProperty("--v",100)
-//       }
-//       let ps = event.clientX - icons[i].getBoundingClientRect().left
-//       if (ps/icons[i].offsetWidth < 0.5) {
-//         icons[i].style.setProperty("--v",50)
-//         vote += 0.5
-//       } else {
-//         icons[i].style.setProperty("--v",100)
-//         vote++
-//       }
-//     }
 
-//   }
-//   score.innerText = vote.toFixed(1);
-
-//   try {
-//     const response = await saveStars(vote);
-//     console.log(vote);
-//     console.log(response);
-//   } catch (error) {
-//     console.error(error);
-//   }
-//   //window.location.href = 'avg_stars.html'
-// })
-// 新的点击事件处理函数
 stars.addEventListener("click", async function (event) {
   renderingVote();
 });
@@ -277,23 +244,33 @@ commentForm.addEventListener("submit", async function (event) {
   }
 });
 
+
+
 commentInput.addEventListener("input", function () {
   useCount.innerText = commentInput.value.length;
 });
 
 const saveComment = async (comment) => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const post_id = urlParams.get('postId');
+
+  const localToken = localStorage.getItem("token");
+  const userData = localStorage.getItem("userData");
+  const userDataObj = JSON.parse(userData);
+  const account_id = userDataObj.account_id;
   
   try {
-    const response = await fetch(backendUrl + "/newcomments", {
+    const response = await fetch(backendUrl+"/newcomment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        post_id: postId,
+        post_id: post_id,
         account_id: account_id,
         comment: comment,
-        // date: new Date(),
+        date: new Date(),
       }),
     });
     return response.json();
@@ -361,11 +338,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   const commentsData = await getCommentsByPostId();
   renderingComments(commentsData);
 
-  // const localToken = localStorage.getItem("token");
+  const localToken = localStorage.getItem("token");
 
-  // registration(backendUrl);
-  // login(backendUrl);
-  // loginStatusIsValid(localToken, backendUrl);
+  registration(backendUrl);
+  login(backendUrl);
+  loginStatusIsValid(localToken, backendUrl);
   jumpToSearchResult();
   logout();
 });

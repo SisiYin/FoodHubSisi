@@ -18,59 +18,58 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
 
-app.get("/user/:account_id", async (req, res) => {
-  const account_id =2
+// app.get("/user/:account_id", async (req, res) => {
   
-  try {
-    const result = await pool.query(
-      "SELECT * FROM account WHERE account_id = $1;",
-      [account_id]
-    );
-    res.status(200).json(result.rows);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//   try {
+//     const result = await pool.query(
+//       "SELECT * FROM account WHERE account_id = $1;",
+//       [account_id]
+//     );
+//     res.status(200).json(result.rows);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
-app.get("/:account_id/comments", async (req, res) => {
-  const account_id = 2;
-  try {
-    const result = await pool.query(
-      "SELECT comment.*, post.title,post.description,post.photo_data,account.username,account.avatar FROM post JOIN comment on post.post_id = comment.post_id JOIN account ON account.account_id = comment.account_id WHERE comment.account_id = $1 ORDER BY date DESC;",
-      [account_id]
-    );
-    res.status(200).json(result.rows);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+// app.get("/posts/comments/:account_id", async (req, res) => {
+  
+//   try {
+//     const result = await pool.query(
+//       "SELECT comment.*, post.title,post.description,post.photo_data,account.username,account.avatar FROM post JOIN comment on post.post_id = comment.post_id JOIN account ON account.account_id = comment.account_id WHERE comment.account_id = $1 ORDER BY date DESC;",
+//       [account_id]
+//     );
+//     res.status(200).json(result.rows);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
-app.get("/account/:account_id", async (req, res) => {
-  const account_id = 2;
-  try {
-    const result = await pool.query(
-      "SELECT post.*, account.username FROM post join account on post.account_id = account.account_id WHERE post.account_id = $1 ORDER BY date DESC;",
-      [account_id]
-    );
-    res.status(200).json(result.rows);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+// app.get("/account/:account_id", async (req, res) => {
+  
+//   try {
+//     const result = await pool.query(
+//       "SELECT post.*, account.username FROM post join account on post.account_id = account.account_id WHERE post.account_id = $1 ORDER BY date DESC;",
+//       [account_id]
+//     );
+//     res.status(200).json(result.rows);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
 // Function to get a post by post_id
-app.get("/posts/:postId", async (req, res) => {
+// app.get("/posts/:postId", async (req, res) => {
   
-  try {
-    const result = await pool.query(
-      "SELECT post.*, account.username FROM post join account on post.account_id = account.account_id WHERE post.post_id = $1;",
-      [post_id]
-    );
-    res.status(200).json(result.rows);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//   try {
+//     const result = await pool.query(
+//       "SELECT post.*, account.username FROM post join account on post.account_id = account.account_id WHERE post.post_id = $1;",
+//       [post_id]
+//     );
+//     res.status(200).json(result.rows);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
 // Function to get comments by post_id
 app.get("/posts/:postId/comments", async (req, res) => {
@@ -122,3 +121,4 @@ app.post("/newcomment", (req, res) => {
 // generateJWTSecret();
 const port = process.env.PORT;
 app.listen(port, console.log(`Port:${port} has been listening....`));
+

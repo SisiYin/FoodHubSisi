@@ -1,3 +1,4 @@
+// import { Posts } from "./modules/posts.js";
 import {
   registration,
   login,
@@ -15,9 +16,13 @@ import {
 
 
 const backendUrl = "http://localhost:3001";
-const account_id = 2;
 
-const moreInf = document.getElementById("moreInf");
+// const localToken = localStorage.getItem("token");
+// const userData = localStorage.getItem("userData");
+// const userDataObj = JSON.parse(userData);
+// const account_id = userDataObj.account_id;
+
+// const moreInf = document.getElementById("moreInf");
 
 const createImage = (photoData) => {
   const uint8Array = new Uint8Array(photoData);
@@ -28,13 +33,11 @@ const createImage = (photoData) => {
   img.alt = "photo";
   img.className = "mb-4 rounded-circle";
   img.style.width = "100px";
-  
-  // 返回创建的图像元素
   return img;
 };
 
 const renderingMyInf = (userData) => {
-  const userAvatar = userData[0].avatar.data;
+  const userAvatar = userData.avatar.data;
   console.log(userAvatar)
   const imgContainer = document.getElementById('myAvatar');
   const img = createImage(userAvatar);
@@ -43,20 +46,15 @@ const renderingMyInf = (userData) => {
 
   const username = document.getElementById("username");
   const accountId = document.getElementById("accountId");
-  // const countryElement = document.getElementById('country'); // 如果需要渲染国家信息
   const email = document.getElementById("email");
 
-  // 渲染用户名
-  username.innerHTML = userData[0].username;
+  username.innerHTML = userData.username;
 
-  // 渲染账户 ID
-  accountId.innerHTML = `account id: ${userData[0].account_id}`;
+  accountId.innerHTML = `account id: ${userData.account_id}`;
 
-  // 渲染邮箱地址
-  email.innerHTML = `email: ${userData[0].email}`;
+  email.innerHTML = `email: ${userData.email}`;
 };
 
-// 渲染我的帖子的函数
 const renderingMyPosts = (myPostsData) => {
   const myPostsCardGroup = document.getElementById("myPostsCardGroup");
   myPostsCardGroup.innerHTML = "";
@@ -87,7 +85,7 @@ const renderingMyPosts = (myPostsData) => {
 
 const renderingMyComments = (myCommentsData) => {
   const myCommentsCardGroup = document.getElementById("myCommentsCardGroup");
-  myCommentsCardGroup.innerHTML = ""; // 清除现有内容
+  myCommentsCardGroup.innerHTML = ""; 
 
   myCommentsData.forEach((comment) => {
     const commentAvatarData = comment.avatar.data;
@@ -99,10 +97,10 @@ const renderingMyComments = (myCommentsData) => {
     const cardHTML = `
     <div class="card col-12 mb-4 border border-3">
       <div class="card-body d-flex mt-2">
-        <div class="col-lg-3 col-md-3 col-sm-3 text-lg-right text-md-right text-sm-right">
-          <img src="${avatarImg.src}" class="mb-2 rounded-circle" width="50">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <img src="${avatarImg.src}" class=" rounded-circle" width="60">
         </div>
-        <div class="col-6 px-3">
+        <div class="col-9 px-3">
           <h5 class="card-title">${comment.username}</h5>
           <p class="card-text" style="color: #777;">${timeSince(
             comment.date
@@ -125,38 +123,43 @@ const renderingMyComments = (myCommentsData) => {
   });
 };
 
+// const localToken = localStorage.getItem("token");
+// const userData = localStorage.getItem("userData");
+// const userDataObj = JSON.parse(userData);
+// const account_id = userDataObj.account_id;
+
 //function to get userdata
-const getUserData = async () => {
-  
-  try {
-    const response = await fetch(`${backendUrl}/user/${account_id}`);
-    const userData = await response.json();
-    console.log(userData);
-    return userData;
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+// const getUserData = async () => {
+
+//   try {
+//     const response = await fetch(`${backendUrl}/user/${account_id}`);
+//     const userData = await response.json();
+//     console.log(userData);
+    
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// };
 
 //function to get post data by account_id
-const getPostData = async () => {
+const getPostData = async (account_id) => {
   
   try {
-    const response = await fetch(`${backendUrl}/account/${account_id}`);
+    const response = await fetch(`${backendUrl}/posts/account/${account_id}`);
     const myPostsData = await response.json();
-    console.log(myPostsData);
+    
     return myPostsData;
   } catch (error) {
     console.log(error.message);
   }
 };
 
-const getCommentData = async () => {
+const getCommentData = async (account_id) => {
   
   try {
-    const response = await fetch(`${backendUrl}/${account_id}/comments`);
+    const response = await fetch(`${backendUrl}/posts/comments/${account_id}`);
     const myCommentsData = await response.json();
-    console.log(myCommentsData);
+    
     return myCommentsData;
   } catch (error) {
     console.log(error.message);
@@ -198,17 +201,32 @@ function timeSince(timestamp) {
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  //get account_id:
+  const localToken = localStorage.getItem("token");
+  const userData = localStorage.getItem("userData");
+  const userDataObj = JSON.parse(userData);
+  const account_id = userDataObj.account_id;
+  //get 
+ 
+  const myPostsData = await getPostData(account_id);
+  const myCommentsData = await getCommentData(account_id);
   
-  const userData = await getUserData();
-  const myPostsData = await getPostData();
-  const myCommentsData = await getCommentData();
+  // console.log(userDataObj)
+  // console.log(account_id)
+  // console.log(myPostsData)
+  // console.log(myCommentsData)
 
-  renderingMyInf(userData);
+  renderingMyInf(userDataObj);
   renderingMyPosts(myPostsData);
   renderingMyComments(myCommentsData);
+  registration(backendUrl);
+  login(backendUrl);
+  loginStatusIsValid(localToken, backendUrl);
   jumpToSearchResult();
-
+  logout();
 });
+
+
 
 // moreInf.addEventListener("click", async () => {
 

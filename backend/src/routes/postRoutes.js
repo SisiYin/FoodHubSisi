@@ -11,6 +11,7 @@ router.get("/:post_id", postController.getPostByPostId);
 router.get("/:post_id/comments", postController.getCommentsByPostId);
 router.get("/account/:account_id", postController.getAllPostsByAccountId);
 router.get("/", postController.getAllPosts);
+router.get("/comments/:account_id", postController.getAllCommentsByAccountId);
 
 router.post(
   "/new",

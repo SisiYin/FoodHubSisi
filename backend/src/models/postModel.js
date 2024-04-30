@@ -55,6 +55,19 @@ class Post {
       throw new Error(err.message);
     }
   }
+  // Function to get all of comments by account_id
+  static async getAllCommentsByAccountId(account_id) {
+    try {
+      const queryText = `SELECT comment.*, post.title,post.description,post.photo_data,account.username,account.avatar FROM post JOIN comment on post.post_id = comment.post_id JOIN account ON account.account_id = comment.account_id WHERE comment.account_id = $1 ORDER BY date DESC;`;
+      const post = await query(queryText, [account_id]);
+      await Post.updateCommentNum(post.post_id);
+      return post.rows || null;
+    } catch (err) {
+      throw new Error(err.message);
+    }
+  }
+
+
   // Function to get the latest post with photo by date
   static async getLatestPost() {
     try {
