@@ -72,18 +72,18 @@ app.use("/user", userRoutes);
 // });
 
 // Function to get comments by post_id
-app.get("/posts/:postId/comments", async (req, res) => {
+// app.get("/posts/:postId/comments", async (req, res) => {
   
-  try {
-    const result = await pool.query(
-      "SELECT comment.*, account.username, account.avantar FROM comment join account on comment.account_id = account.account_id WHERE post_id = $1 ORDER BY date DESC;",
-      [post_id]
-    );
-    res.status(200).json(result.rows);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+//   try {
+//     const result = await pool.query(
+//       "SELECT comment.*, account.username, account.avantar FROM comment join account on comment.account_id = account.account_id WHERE post_id = $1 ORDER BY date DESC;",
+//       [post_id]
+//     );
+//     res.status(200).json(result.rows);
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
+// });
 
 app.post("/newrate", (req, res) => {
 
